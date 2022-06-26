@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
 import {FilterValueType} from './App';
 
 type TodoListType = {
@@ -31,6 +31,17 @@ export const TodoList = (props: TodoListType) => {
   const onCompletedClickHandler = () => {
     props.changeFilter('completed')
   }
+const removeTaskHandler =(tID:string)=>{
+    props.removeTask(tID)
+  }
+  const onKeyPressHandler =(e: KeyboardEvent<HTMLInputElement>)=>{
+    if(e.key==='Enter'){
+      addTaskHandler()
+    }
+  }
+  const onChangeHandler =(e:ChangeEvent<HTMLInputElement>)=> {
+    setTitle(e.currentTarget.value)
+  }
 
   return (
     <div>
@@ -38,10 +49,8 @@ export const TodoList = (props: TodoListType) => {
       <div>
         <input
           value={title}
-          onChange={(e) => {
-            setTitle(e.currentTarget.value)
-          }}
-          onKeyPress={(e)=>{if(e.key==='Enter'){addTaskHandler()}}}
+          onChange={onChangeHandler}
+          onKeyPress={onKeyPressHandler}
         />
         <button onClick={addTaskHandler}>+</button>
       </div>
@@ -51,10 +60,7 @@ export const TodoList = (props: TodoListType) => {
             <li key={el.id}>
               <input type="checkbox" checked={el.isDone}/>
               <span>{el.title}</span>
-              <button onClick={() => {
-                props.removeTask(el.id)
-              }}>✖
-              </button>
+              <button onClick={() => {removeTaskHandler(el.id)}}>✖</button>
             </li>
           )
         })
