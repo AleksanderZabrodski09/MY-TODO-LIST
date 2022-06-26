@@ -1,19 +1,33 @@
 import React from 'react';
+import {FilterValueType} from './App';
 
 type TodoListType = {
   title: string
   tasks: TaskType[]
-  removeTask: (id: number) => void
+  removeTask: (id: string) => void
+  changeFilter:(value: FilterValueType)=> void
 }
 
 type TaskType = {
-  id: number
+  id: string
   title: string
   isDone: boolean
 }
 
 
 export const TodoList = (props: TodoListType) => {
+
+
+ const onAllClickHandler=()=> {
+   props.changeFilter('all')
+ }
+  const onActiveClickHandler=()=> {
+    props.changeFilter('active')
+  }
+  const onCompletedClickHandler=()=> {
+    props.changeFilter('completed')
+  }
+
   return (
     <div>
       <h3>{props.title}</h3>
@@ -34,9 +48,9 @@ export const TodoList = (props: TodoListType) => {
         }
       </ul>
       <div>
-        <button>All</button>
-        <button>Active</button>
-        <button>Completed</button>
+        <button onClick={onAllClickHandler}>All</button>
+        <button onClick={onActiveClickHandler}>Active</button>
+        <button onClick={onCompletedClickHandler}>Completed</button>
       </div>
     </div>
   )
