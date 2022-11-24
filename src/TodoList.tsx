@@ -21,8 +21,10 @@ type TaskType = {
 export const TodoList = (props: TodoListType) => {
   const [title, setTitle] = useState('')
   const addTaskHandler = () => {
-    props.addTask(title)
-    setTitle('')
+   if(title.trim()!=='') {
+      props.addTask(title.trim())
+      setTitle('')
+    }
   }
   const removeTaskHandler = (tID: string) => {
     props.removeTask(tID)
