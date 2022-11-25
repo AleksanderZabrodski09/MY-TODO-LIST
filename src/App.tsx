@@ -11,7 +11,7 @@ export type TodolistType = {
 }
 
 export type TasksPropsType={
-  [key:string]:TaskType
+  [key:string]:TaskType[]
 }
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
     {todolistId: todolistId2, title: 'What to bay?', filter: 'all'},
   ])
 
-  const [tasks, setTasks] = useState({
+  const [tasks, setTasks] = useState<TasksPropsType>({
       [todolistId1]: [{id: v1(), title: "HTML&CSS", isDone: true},
         {id: v1(), title: "JS", isDone: true},
         {id: v1(), title: "ReactJS", isDone: false},
@@ -38,32 +38,22 @@ function App() {
     }
   )
   const addTask = (todolistId:string, title: string) => {
-
-    let task = {id: v1(), title: title, isDone: false}
-    let newTask = [task, ...tasks]
-    setTasks(newTask)
+    setTasks({...tasks, [todolistId]:[{id: v1(), title: title, isDone: false}, ...tasks[todolistId]]})
   }
-  const removeTask = (id: string) => {
-    let filteredTask = tasks.filter(el => el.id !== id)
-    setTasks(filteredTask)
+  const removeTask = (todolistId:string,taskId: string) => {
+    setTasks({...tasks, [todolistId]:tasks[todolistId].filter(t=>t.id!==taskId)})
   }
-  // const [filter, setFilter] = useState<FilterValueType>('all')
+  const changeTaskStatus = (todolistId:string,taskId: string, value: boolean) => {
+    setTasks({...tasks, [todolistId]:tasks[todolistId].map(t=>t.id===taskId?{...t, isDone:value}:t)})
+    // console.log(taskId, value)
+    // setTasks(tasks.map(t => t.id === taskId ? {...t, isDone: value} : t))
+  }
 
-  // let tasksTodolist = tasks
-  // if (filter === 'active') {
-  //   tasksTodolist = tasks.filter(el => el.isDone === false)
-  // }
-  // if (filter === 'completed') {
-  //   tasksTodolist = tasks.filter(el => el.isDone === true)
-  // }
+
   const changeFilter = (todolistId:string, value: FilterValueType) => {
-    // console.log(value)
     setTodolists(todolists.map(tl=>tl.todolistId===todolistId?{...tl, filter:value}:tl))
   }
-  const changeTaskStatus = (taskId: string, value: boolean) => {
-    // console.log(taskId, value)
-    setTasks(tasks.map(t => t.id === taskId ? {...t, isDone: value} : t))
-  }
+
 
   return (
     <div className="App">
