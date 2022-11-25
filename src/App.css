@@ -22,3 +22,12 @@
   border-radius: 5px;
   color: brown;
 }
+
+.buttonFilter:hover{
+  box-shadow:   0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+}
+
+
+.completed{
+opacity: 0.4;
+}
