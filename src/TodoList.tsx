@@ -2,6 +2,7 @@ import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
 import {FilterValueType} from './App';
 
 type TodoListType = {
+  todolistId:string
   title: string
   tasks: TaskType[]
   removeTask: (id: string) => void
