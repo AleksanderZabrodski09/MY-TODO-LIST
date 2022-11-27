@@ -27,6 +27,9 @@ export const AddInputForm: React.FC<AddInputForm> = (props) => {
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value)
   }
+
+
+
   return (
     <div>
       <input
