@@ -28,8 +28,6 @@ export const AddInputForm: React.FC<AddInputForm> = (props) => {
     setTitle(e.currentTarget.value)
   }
 
-
-
   return (
     <div>
       <input
