@@ -88,6 +88,9 @@ export const TodoList = (props: TodoListType) => {
         })}
       </ul>
       <div>
+
+        {/*<Button name={'All'} callBack={onAllClickHandler} className={props.filter === 'all' ? 'activeFilter' : 'buttonFilter'}/>*/}
+
         <button onClick={onAllClickHandler} className={props.filter === 'all' ? 'activeFilter' : 'buttonFilter'}>All
         </button>
         <button onClick={onActiveClickHandler}
@@ -101,3 +104,18 @@ export const TodoList = (props: TodoListType) => {
   )
 }
 
+
+// export type ButtonType = {
+//   name: string
+//   callBack: () => void
+//
+// }
+// export const Button = ({name, callBack}: ButtonType) => {
+//   const onClickHandler = () => {
+//     callBack()
+//   }
+//
+//   return <>
+//     <button onClick={onClickHandler}>{name}</button>
+//   </>
+// }
