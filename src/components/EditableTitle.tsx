@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 export type EditableTitle = {
   value: string
-  onChange: (title: string) => void
+  callback: (title: string) => void
 }
 export const EditableTitle: React.FC<EditableTitle> = (props) => {
 
@@ -16,7 +16,7 @@ export const EditableTitle: React.FC<EditableTitle> = (props) => {
   }
   const viewMode = () => {
     setEditMode(false)
-    props.onChange(title.trim())
+    props.callback(title.trim())
   }
 
 
