@@ -2,6 +2,7 @@ import React from 'react';
 import {FilterValueType} from './App';
 import {AddInputForm} from './components/AddInputForm';
 import {EditableTitle} from './components/EditableTitle';
+import {CheckBox} from './components/CheckBox';
 
 type TodoListType = {
   todolistId: string
@@ -46,20 +47,19 @@ export const TodoList = (props: TodoListType) => {
   const onCompletedClickHandler = () => {
     props.changeFilter(props.todolistId, 'completed')
   }
-  const OnChangeStatusHandler = (tlID: string, taskID: string, eValue: boolean) => {
-    props.changeTaskStatus(tlID, taskID, eValue)
+  const OnChangeStatusHandler = (taskID: string, eValue: boolean) => {
+    props.changeTaskStatus(props.todolistId, taskID, eValue)
   }
   const editTaskTitle = (taskID: string, title: string) => {
     props.editTaskTitle(props.todolistId, taskID, title)
   }
-  const editTodolistTitle = ( title: string) => {
-    props.editTodolistTitle(props.todolistId,  title)
+  const editTodolistTitle = (title: string) => {
+    props.editTodolistTitle(props.todolistId, title)
   }
 
   const removeTodolistHandler = () => {
     props.removeTodolist(props.todolistId)
   }
-
 
 
   return (
@@ -77,11 +77,12 @@ export const TodoList = (props: TodoListType) => {
 
           return (
             <li key={t.id} className={t.isDone ? 'completed' : ''}>
-              <input type="checkbox" checked={t.isDone}
-                     onChange={(e) => OnChangeStatusHandler(props.todolistId, t.id, e.currentTarget.checked)}
-              />
+              <CheckBox checked={t.isDone} callBack={(eValue)=>OnChangeStatusHandler(t.id,eValue)}/>
+              {/*<CheckBox checked={t.isDone} callBack={(eValue)=>OnChangeStatusHandler(props.todolistId,t.id,eValue)}/>*/}
+              {/*<input type="checkbox" checked={t.isDone}*/}
+              {/*       onChange={(e) => OnChangeStatusHandler(props.todolistId, t.id, e.currentTarget.checked)}*/}
+              {/*/>*/}
               <EditableTitle value={t.title} callback={(title) => editTaskTitle(t.id, title)}/>
-              {/*<span>{t.title}</span>*/}
               <button
                 onClick={() => removeTaskHandler(props.todolistId, t.id)}
               >✖
@@ -104,5 +105,4 @@ export const TodoList = (props: TodoListType) => {
     </div>
   )
 }
-
 
