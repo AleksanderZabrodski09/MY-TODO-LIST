@@ -4,9 +4,10 @@ import {FilterValueType} from './App';
 type TodoListType = {
   title: string
   task: TaskType[]
-  removeTask: (id: string) => void
+  removeTask: (taskId: string) => void
   filterChange: (value: FilterValueType) => void
   addTask: (title: string) => void
+  changeTaskStatus: (taskId: string, value: boolean) => void
 }
 
 type TaskType = {
@@ -34,18 +35,23 @@ export const TodoList = (props: TodoListType) => {
       addTaskHandler();
     }
   }
-  const removeTaskHeader= (tID:string)=>{
+  const removeTaskHeader = (tID: string) => {
     props.removeTask(tID)
   }
-  const onAllClickHandler =()=>{
+  const onAllClickHandler = () => {
     props.filterChange('all')
   }
-  const onActiveClickHandler =()=>{
+  const onActiveClickHandler = () => {
     props.filterChange('active')
   }
-  const onCompletedClickHandler =()=>{
+  const onCompletedClickHandler = () => {
     props.filterChange('completed')
   }
+
+  const changeTaskStatusHandler = (tID:string, eValue:boolean) => {
+    props.changeTaskStatus(tID,eValue)
+  }
+
   return (
     <div>
       <h3>{props.title}</h3>
@@ -62,12 +68,15 @@ export const TodoList = (props: TodoListType) => {
       <ul>
         {props.task.map(el => {
 
-          return (
-          <li key={el.id}>
-            <input type="checkbox" checked={el.isDone}/>
-            <span>{el.title}</span>
-            <button onClick={()=>removeTaskHeader(el.id)}>✖</button>
-          </li>)}
+
+
+            return (
+              <li key={el.id}>
+                <input type="checkbox" checked={el.isDone} onChange={(e)=>changeTaskStatusHandler(el.id, e.currentTarget.checked)}/>
+                <span>{el.title}</span>
+                <button onClick={() => removeTaskHeader(el.id)}>✖</button>
+              </li>)
+          }
         )
         }
 
