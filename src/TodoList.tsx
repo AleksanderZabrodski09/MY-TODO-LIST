@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValueType} from './App';
+import {CheckBox} from './CheckBox';
 
 type TodoListType = {
   title: string
@@ -67,12 +68,10 @@ export const TodoList = (props: TodoListType) => {
       </div>
       <ul>
         {props.task.map(el => {
-
-
-
             return (
               <li key={el.id}>
-                <input type="checkbox" checked={el.isDone} onChange={(e)=>changeTaskStatusHandler(el.id, e.currentTarget.checked)}/>
+              <CheckBox checked={el.isDone} callBack={(value:boolean)=>changeTaskStatusHandler(el.id, value)}/>
+                {/*<input type="checkbox" checked={el.isDone} onChange={(e)=>changeTaskStatusHandler(el.id, e.currentTarget.checked)}/>*/}
                 <span>{el.title}</span>
                 <button onClick={() => removeTaskHeader(el.id)}>✖</button>
               </li>)
@@ -92,3 +91,4 @@ export const TodoList = (props: TodoListType) => {
     </div>
   )
 }
+
