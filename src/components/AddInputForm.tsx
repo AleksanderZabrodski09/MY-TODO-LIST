@@ -1,9 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {Button, TextField} from '@mui/material';
 
-export type AddInputForm = {
+export type AddInputFormType = {
   addInput: (title: string) => void
 }
-export const AddInputForm: React.FC<AddInputForm> = (props) => {
+export const AddInputForm: React.FC<AddInputFormType> = (props) => {
 
   const [title, setTitle] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -30,14 +31,19 @@ export const AddInputForm: React.FC<AddInputForm> = (props) => {
 
   return (
     <div>
-      <input
+      <TextField
+        label='Enter title'
+        variant='standard'
         value={title}
         onChange={onChangeHandler}
         onKeyPress={onKeyPressHandler}
-        className={error ? 'error' : ''}
+        // className={error ? 'error' : ''}
+        error={!!error}
+        helperText={error}
       />
-      <button onClick={addInput}>+</button>
-      {error && <div className={'errorMessage'}>{error}</div>}
+      <Button variant='contained' color='primary' style={{maxWidth: '25px', maxHeight: '25px', minWidth: '25px', minHeight: '25px'}} onClick={addInput}>+</Button>
+
+      {/*{error && <div className={'errorMessage'} >{error}</div>}*/}
     </div>
   )
 }

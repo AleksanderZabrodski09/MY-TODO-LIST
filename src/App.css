@@ -1,33 +1,33 @@
-.App {
-  padding: 30px;
-  display: flex;
-}
+/*.App {*/
+/*  padding: 30px;*/
+/*  display: flex;*/
+/*}*/
 
-.App > div {
-  margin-right: 50px;
-}
+/*.App > div {*/
+/*  margin-right: 50px;*/
+/*}*/
 
-.error{
-  border: 2px solid red;
-}
+/*.error{*/
+/*  border: 2px solid red;*/
+/*}*/
 
 .errorMessage{
   color:red
 }
 
-.activeFilter{
-  background-color: aquamarine;
-  border: none;
-  padding: 3px 6px;
-  border-radius: 5px;
-  color: brown;
-}
+/*.activeFilter{*/
+/*  background-color: aquamarine;*/
+/*  border: none;*/
+/*  padding: 3px 6px;*/
+/*  border-radius: 5px;*/
+/*  color: brown;*/
+/*}*/
 
-.buttonFilter:hover{
-  box-shadow:   0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
-}
+/*.buttonFilter:hover{*/
+/*  box-shadow:   0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;*/
+/*}*/
 
 
-.completed{
-opacity: 0.4;
-}
+/*.completed{*/
+/*opacity: 0.4;*/
+/*}*/

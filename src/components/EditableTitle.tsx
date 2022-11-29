@@ -1,10 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {TextField} from '@mui/material';
 
-export type EditableTitle = {
+export type EditableTitleType = {
   value: string
   callback: (title: string) => void
 }
-export const EditableTitle: React.FC<EditableTitle> = (props) => {
+export const EditableTitle: React.FC<EditableTitleType> = (props) => {
 
   const [editMode, setEditMode] = useState(false)
   let [title, setTitle] = useState('')
@@ -32,7 +33,8 @@ export const EditableTitle: React.FC<EditableTitle> = (props) => {
   }
 
   return editMode
-    ? <input
+    ? <TextField
+      variant='standard'
       value={title} onChange={onChangeHandler}
       onBlur={viewMode} autoFocus
       onKeyPress={onKeyPressHandler}
