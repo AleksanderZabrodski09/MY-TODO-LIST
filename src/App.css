@@ -27,3 +27,7 @@
   background-color: rgba(116, 236, 208, 0.54);
   box-shadow: 4px -3px 14px aquamarine;
 }
+
+.isDoneTask{
+  opacity: 0.4;
+}
