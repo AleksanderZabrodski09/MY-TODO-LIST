@@ -52,7 +52,9 @@ function App() {
         task={filterForTodolist}
         removeTask={removeTask}
         filterChange={filterChange}
+        filter={filter}
         changeTaskStatus={changeTaskStatus}
+
       />
 
     </div>

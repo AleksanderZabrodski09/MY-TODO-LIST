@@ -1,12 +1,13 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValueType} from './App';
-import {CheckBox} from './CheckBox';
+import {CheckBox} from './components/CheckBox';
 
 type TodoListType = {
   title: string
   task: TaskType[]
   removeTask: (taskId: string) => void
   filterChange: (value: FilterValueType) => void
+  filter: FilterValueType
   addTask: (title: string) => void
   changeTaskStatus: (taskId: string, value: boolean) => void
 }
@@ -87,11 +88,11 @@ export const TodoList = (props: TodoListType) => {
 
       </ul>
       <div>
-        <button onClick={onAllClickHandler}>All
+        <button onClick={onAllClickHandler} className={props.filter==='all'? 'activeFilter' : 'buttonFilter'}>All
         </button>
-        <button onClick={onActiveClickHandler}>Active
+        <button onClick={onActiveClickHandler} className={props.filter==='active'? 'activeFilter' : 'buttonFilter'}>Active
         </button>
-        <button onClick={onCompletedClickHandler}>Completed
+        <button onClick={onCompletedClickHandler} className={props.filter==='completed'? 'activeFilter' : 'buttonFilter'}>Completed
         </button>
       </div>
     </div>
