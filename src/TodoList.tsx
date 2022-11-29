@@ -21,12 +21,14 @@ type TaskType = {
 export const TodoList = (props: TodoListType) => {
 
   const [title, setTitle] = useState('')
-
+  const [error, setError] = useState<string | null>(null)
 
   const addTaskHandler = () => {
     if (title.trim() !== '') {
       props.addTask(title.trim())
       setTitle('')
+    } else {
+      setError('Title is required')
     }
 
   }
@@ -34,7 +36,7 @@ export const TodoList = (props: TodoListType) => {
     setTitle(e.currentTarget.value)
   }
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-
+    setError( null)
     if (e.key === "Enter") {
       addTaskHandler();
     }
@@ -64,9 +66,10 @@ export const TodoList = (props: TodoListType) => {
           value={title}
           onChange={onChangeTitleHandler}
           onKeyPress={onKeyPressHandler}
+          className={error ? 'error' : ''}
         />
-
         <button onClick={addTaskHandler}>+</button>
+        {error && <div className='errorMessage'>{error}</div>}
 
       </div>
       <ul>
@@ -74,7 +77,7 @@ export const TodoList = (props: TodoListType) => {
             return (
               <li key={el.id}>
                 <CheckBox checked={el.isDone} callBack={(value: boolean) => changeTaskStatusHandler(el.id, value)}/>
-                {/*<input type="checkbox" checked={el.isDone} onChange={(e)=>changeTaskStatusHandler(el.id, e.currentTarget.checked)}/>*/}
+
                 <span>{el.title}</span>
                 <button onClick={() => removeTaskHeader(el.id)}>✖</button>
               </li>)

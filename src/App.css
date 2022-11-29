@@ -6,3 +6,12 @@
 .App > div {
   margin-right: 50px;
 }
+
+
+.error{
+  border: red 2px solid;
+}
+
+.errorMessage{
+  color:red
+}
