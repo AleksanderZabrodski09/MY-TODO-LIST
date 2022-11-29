@@ -3,10 +3,11 @@ import {FilterValueType} from './App';
 import {CheckBox} from './components/CheckBox';
 
 type TodoListType = {
+  todolistId:string
   title: string
   task: TaskType[]
   removeTask: (taskId: string) => void
-  filterChange: (value: FilterValueType) => void
+  filterChange: (todolistId:string,value: FilterValueType) => void
   filter: FilterValueType
   addTask: (title: string) => void
   changeTaskStatus: (taskId: string, value: boolean) => void
@@ -46,13 +47,13 @@ export const TodoList = (props: TodoListType) => {
     props.removeTask(tID)
   }
   const onAllClickHandler = () => {
-    props.filterChange('all')
+    props.filterChange(props.todolistId, 'all')
   }
   const onActiveClickHandler = () => {
-    props.filterChange('active')
+    props.filterChange(props.todolistId, 'active')
   }
   const onCompletedClickHandler = () => {
-    props.filterChange('completed')
+    props.filterChange(props.todolistId,'completed')
   }
 
   const changeTaskStatusHandler = (tID: string, eValue: boolean) => {
