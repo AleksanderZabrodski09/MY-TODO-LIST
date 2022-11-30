@@ -38,22 +38,22 @@ function App() {
   )
 
 
-  const addTask = (title: string) => {
-    let task = {id: v1(), title: title, isDone: false};
-    let newTasks = [task, ...tasks];
-    setTasks(newTasks);
+  const addTask = (todolistId:string,title: string) => {
+    setTasks({...tasks, [todolistId]:[{id: v1(), title: title, isDone: false}, ...tasks[todolistId]]})
+    // let task = {id: v1(), title: title, isDone: false};
+    // let newTasks = [task, ...tasks];
+    // setTasks(newTasks);
   }
-  const removeTask = (id: string) => {
-    let filteredTasks = tasks.filter(el => el.id !== id)
-    console.log(filteredTasks)
-    setTasks(filteredTasks)
+  const removeTask = (todolistId:string,taskId: string) => {
+    setTasks({...tasks, [todolistId]:tasks[todolistId].filter(t=>t.id!==taskId)})
+
   }
 
   const filterChange = (todolistId:string,value: FilterValueType) => {
     setTodolists(todolists.map(tl=>tl.todolistId===todolistId?{...tl, filter: value}:tl))
   }
   const changeTaskStatus = (taskId: string, value: boolean) => {
-    setTasks(tasks.map(t => t.id === taskId ? {...t, isDone: value} : t))
+    // setTasks(tasks.map(t => t.id === taskId ? {...t, isDone: value} : t))
   }
 
 
@@ -63,12 +63,12 @@ function App() {
       {
         todolists.map(tl=>{
 
-          let filterForTodolist = tasks;
+          let filterForTodolist = tasks[tl.todolistId];
           if (tl.filter === 'active') {
-            filterForTodolist = tasks.filter(el => el.isDone === true);
+            filterForTodolist = filterForTodolist.filter(el => el.isDone === true);
           }
           if (tl.filter === 'completed') {
-            filterForTodolist = tasks.filter(el => el.isDone === false);
+            filterForTodolist = filterForTodolist.filter(el => el.isDone === false);
           }
 
           return <TodoList
@@ -85,7 +85,6 @@ function App() {
           />
         })
       }
-
 
     </div>
   );

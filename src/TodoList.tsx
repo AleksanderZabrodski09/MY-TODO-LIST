@@ -6,10 +6,10 @@ type TodoListType = {
   todolistId:string
   title: string
   task: TaskType[]
-  removeTask: (taskId: string) => void
+  removeTask: (todolistId:string,taskId: string) => void
   filterChange: (todolistId:string,value: FilterValueType) => void
   filter: FilterValueType
-  addTask: (title: string) => void
+  addTask: (todolistId:string,title: string) => void
   changeTaskStatus: (taskId: string, value: boolean) => void
 }
 
@@ -27,7 +27,7 @@ export const TodoList = (props: TodoListType) => {
 
   const addTaskHandler = () => {
     if (title.trim() !== '') {
-      props.addTask(title.trim())
+      props.addTask(props.todolistId,title.trim())
       setTitle('')
     } else {
       setError('Title is required')
@@ -44,7 +44,7 @@ export const TodoList = (props: TodoListType) => {
     }
   }
   const removeTaskHeader = (tID: string) => {
-    props.removeTask(tID)
+    props.removeTask(props.todolistId,tID)
   }
   const onAllClickHandler = () => {
     props.filterChange(props.todolistId, 'all')
