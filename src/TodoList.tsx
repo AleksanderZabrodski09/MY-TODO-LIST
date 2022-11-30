@@ -7,10 +7,11 @@ type TodoListType = {
   title: string
   task: TaskType[]
   removeTask: (todolistId:string,taskId: string) => void
-  filterChange: (todolistId:string,value: FilterValueType) => void
   filter: FilterValueType
   addTask: (todolistId:string,title: string) => void
   changeTaskStatus: (todolistId:string,taskId: string, value: boolean) => void
+  filterChange: (todolistId:string,value: FilterValueType) => void
+  removeTodolist:(todolistId:string)=>void
 }
 
 type TaskType = {
@@ -59,10 +60,16 @@ export const TodoList = (props: TodoListType) => {
   const changeTaskStatusHandler = (tID: string, eValue: boolean) => {
     props.changeTaskStatus(props.todolistId,tID, eValue)
   }
+const removeTodolistHeader=()=>{
+    props.removeTodolist(props.todolistId)
+}
 
   return (
     <div>
-      <h3>{props.title}</h3>
+      <h3>{props.title}
+        <button onClick={removeTodolistHeader}>✖</button>
+      </h3>
+
       <div>
         <input
           value={title}

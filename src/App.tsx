@@ -45,12 +45,16 @@ function App() {
     setTasks({...tasks, [todolistId]:tasks[todolistId].filter(t=>t.id!==taskId)})
 
   }
+  const changeTaskStatus = (todolistId:string, taskId: string, value: boolean) => {
+    setTasks({...tasks, [todolistId]:tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: value} : t)})
+  }
 
   const filterChange = (todolistId:string,value: FilterValueType) => {
     setTodolists(todolists.map(tl=>tl.todolistId===todolistId?{...tl, filter: value}:tl))
   }
-  const changeTaskStatus = (todolistId:string, taskId: string, value: boolean) => {
-    setTasks({...tasks, [todolistId]:tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: value} : t)})
+
+  const removeTodolist=(todolistId:string)=>{
+    setTodolists(todolists.filter(tl=>tl.todolistId===todolistId))
   }
 
 
@@ -78,6 +82,7 @@ function App() {
             filterChange={filterChange}
             filter={tl.filter}
             changeTaskStatus={changeTaskStatus}
+            removeTodolist={removeTodolist}
 
           />
         })
