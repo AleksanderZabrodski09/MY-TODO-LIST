@@ -20,13 +20,22 @@ function App() {
     {todolistId: todolistId1, title:'What to learn?', filter:'all'},
     {todolistId: todolistId2, title:'What to buy?', filter:'all'}
   ])
-  const [tasks, setTasks] = useState([
-    {id: v1(), title: "HTML&CSS", isDone: true},
-    {id: v1(), title: "JS", isDone: true},
-    {id: v1(), title: "ReactJS", isDone: false},
-    {id: v1(), title: "TS", isDone: true},
-    {id: v1(), title: "Git", isDone: false}
-  ])
+  const [tasks, setTasks] = useState({
+    [todolistId1]:[
+      {id: v1(), title: "HTML&CSS", isDone: true},
+      {id: v1(), title: "JS", isDone: true},
+      {id: v1(), title: "ReactJS", isDone: false},
+      {id: v1(), title: "TS", isDone: true},
+      {id: v1(), title: "Git", isDone: false}
+    ],
+    [todolistId2]:[
+      {id: v1(), title: "curs-JS", isDone: true},
+      {id: v1(), title: "laptop", isDone: true},
+      {id: v1(), title: "screen", isDone: false},
+    ]
+  }
+
+  )
 
 
   const addTask = (title: string) => {
@@ -39,14 +48,6 @@ function App() {
     console.log(filteredTasks)
     setTasks(filteredTasks)
   }
-  // const [filter, setFilter] = useState<FilterValueType>('all')
-  // let filterForTodolist = tasks;
-  // if (filter === 'active') {
-  //   filterForTodolist = tasks.filter(el => el.isDone === true);
-  // }
-  // if (filter === 'completed') {
-  //   filterForTodolist = tasks.filter(el => el.isDone === false);
-  // }
 
   const filterChange = (todolistId:string,value: FilterValueType) => {
     setTodolists(todolists.map(tl=>tl.todolistId===todolistId?{...tl, filter: value}:tl))
