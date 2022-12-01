@@ -58,7 +58,8 @@ export const TodoList = (props: TodoListType) => {
 
   return (
     <div>
-      <h3>{props.title}
+      <h3>
+        <EditableSpan value={props.title} callBack={(title)=>changeTaskTitle(props.todolistId,title)}/>
         <button onClick={removeTodolistHandler}>✖</button>
       </h3>
       <div>
