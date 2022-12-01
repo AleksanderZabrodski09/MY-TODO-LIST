@@ -3,6 +3,8 @@ import {FilterValueType} from './App';
 import {InputForm} from './components/InputForm';
 import {EditableSpan} from './EditableSpan';
 import {Task} from './Task';
+import {Button} from '@mui/material';
+import FolderDeleteIcon from '@mui/icons-material/FolderDelete';
 
 type TodoListType = {
   todolistId: string
@@ -61,7 +63,9 @@ export const TodoList = (props: TodoListType) => {
     <div>
       <h3>
         <EditableSpan value={props.title} callBack={(title) => changeTaskTitle(props.todolistId, title)}/>
-        <button onClick={removeTodolistHandler}>✖</button>
+        <Button onClick={removeTodolistHandler}>
+          <FolderDeleteIcon/>
+        </Button>
       </h3>
       <div>
         <InputForm addItem={addTask}/>
