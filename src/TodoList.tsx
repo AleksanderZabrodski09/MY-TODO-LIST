@@ -90,14 +90,25 @@ export const TodoList = (props: TodoListType) => {
           })}
       </div>
       <div>
-        <button onClick={onAllClickHandler} className={props.filter === 'all' ? 'activeFilter' : 'buttonFilter'}>All
-        </button>
-        <button onClick={onActiveClickHandler}
-                className={props.filter === 'active' ? 'activeFilter' : 'buttonFilter'}>Active
-        </button>
-        <button onClick={onCompletedClickHandler}
-                className={props.filter === 'completed' ? 'activeFilter' : 'buttonFilter'}>Completed
-        </button>
+        <Button onClick={onAllClickHandler}
+                color='info'
+                size='small'
+                variant={props.filter==='all' ? 'outlined':'text'}
+                // className={props.filter === 'all' ? 'activeFilter' : 'buttonFilter'}
+        >All
+        </Button>
+        <Button onClick={onActiveClickHandler}
+                color='info'
+                size='small'
+                variant={props.filter==='active' ? 'outlined':'text'}
+               >Active
+        </Button>
+        <Button onClick={onCompletedClickHandler}
+                color='primary'
+                size='small'
+                variant={props.filter==='completed' ? 'outlined':'text'}
+               >Completed
+        </Button>
       </div>
     </div>
   )
