@@ -1,4 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {TextField} from '@mui/material';
 
 export const EditableSpan = ({value, callBack}: { value: string, callBack: (value: string) => void }) => {
   const [editMode, setEditMode] = useState(false)
@@ -24,7 +25,8 @@ export const EditableSpan = ({value, callBack}: { value: string, callBack: (valu
   }
 
   return editMode
-    ? <input
+    ? <TextField
+      variant='standard'
       value={newTitle}
       onChange={onChangeHandler}
       onBlur={viewMode}
