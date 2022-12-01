@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import {Checkbox} from '@mui/material';
 
 
 // type CheckBoxType={
@@ -10,11 +11,12 @@ export const CheckBox = ({checked, callBack}: { checked: boolean, callBack: (che
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     callBack(e.currentTarget.checked)
   }
-  return <input
-    type="checkbox"
+  return <Checkbox
+    // type="checkbox"
+    size='small'
+    color='error'
     checked={checked}
     onChange={onChangeHandler}
-
   />
 
 }
