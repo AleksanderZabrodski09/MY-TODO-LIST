@@ -1,8 +1,8 @@
 import React from 'react';
 import {FilterValueType} from './App';
-import {CheckBox} from './components/CheckBox';
 import {InputForm} from './components/InputForm';
 import {EditableSpan} from './EditableSpan';
+import {Task} from './Task';
 
 type TodoListType = {
   todolistId: string
@@ -35,6 +35,10 @@ export const TodoList = (props: TodoListType) => {
   const removeTaskHeader = (tID: string) => {
     props.removeTask(props.todolistId, tID)
   }
+  const changeTaskStatusHandler = (tID: string, eValue: boolean) => {
+    props.changeTaskStatus(props.todolistId, tID, eValue)
+  }
+
   const onAllClickHandler = () => {
     props.filterChange(props.todolistId, 'all')
   }
@@ -45,12 +49,9 @@ export const TodoList = (props: TodoListType) => {
     props.filterChange(props.todolistId, 'completed')
   }
 
-  const changeTaskStatusHandler = (tID: string, eValue: boolean) => {
-    props.changeTaskStatus(props.todolistId, tID, eValue)
-  }
 
-  const changeTaskTitle=(tID:string,title:string)=>{
-    props.changeTaskTitle(props.todolistId, tID,title)
+  const changeTaskTitle = (tID: string, title: string) => {
+    props.changeTaskTitle(props.todolistId, tID, title)
   }
   const removeTodolistHandler = () => {
     props.removeTodolist(props.todolistId)
@@ -59,24 +60,31 @@ export const TodoList = (props: TodoListType) => {
   return (
     <div>
       <h3>
-        <EditableSpan value={props.title} callBack={(title)=>changeTaskTitle(props.todolistId,title)}/>
+        <EditableSpan value={props.title} callBack={(title) => changeTaskTitle(props.todolistId, title)}/>
         <button onClick={removeTodolistHandler}>✖</button>
       </h3>
       <div>
         <InputForm addItem={addTask}/>
       </div>
-      <ul>
+      <div>
         {
           props.task.map(el => {
             return (
-              <li key={el.id}>
-                <CheckBox checked={el.isDone} callBack={(value: boolean) => changeTaskStatusHandler(el.id, value)}/>
-                <EditableSpan value={el.title} callBack={(title)=>changeTaskTitle(el.id,title)}/>
-                {/*<span>{el.title}</span>*/}
-                <button onClick={() => removeTaskHeader(el.id)}>✖</button>
-              </li>
-            )})}
-      </ul>
+              <Task
+                key={el.id}
+                task={el}
+                changeTaskStatus={changeTaskStatusHandler}
+                changeTaskTitle={changeTaskTitle}
+                removeTask={removeTaskHeader}
+              />
+              // <li key={el.id}>
+              //   <CheckBox checked={el.isDone} callBack={(value: boolean) => changeTaskStatusHandler(el.id, value)}/>
+              //   <EditableSpan value={el.title} callBack={(title)=>changeTaskTitle(el.id,title)}/>
+              //   <button onClick={() => removeTaskHeader(el.id)}>✖</button>
+              // </li>
+            )
+          })}
+      </div>
       <div>
         <button onClick={onAllClickHandler} className={props.filter === 'all' ? 'activeFilter' : 'buttonFilter'}>All
         </button>
