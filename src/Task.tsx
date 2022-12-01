@@ -1,5 +1,5 @@
 import {CheckBox} from './components/CheckBox';
-import {EditableSpan} from './EditableSpan';
+import {EditableSpan} from './components/EditableSpan';
 import React from 'react';
 import {TaskType} from './TodoList';
 import {Button} from '@mui/material';

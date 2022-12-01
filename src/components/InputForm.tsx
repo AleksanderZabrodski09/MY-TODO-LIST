@@ -1,4 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {Button} from '@mui/material';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 export const InputForm = ({addItem}: { addItem: (title: string) => void }) => {
 
@@ -32,7 +34,11 @@ export const InputForm = ({addItem}: { addItem: (title: string) => void }) => {
         onKeyPress={onKeyPressHandler}
         className={error ? 'error' : ''}
       />
-      <button onClick={addItemHandler}>+</button>
+      <Button onClick={addItemHandler}
+              variant='contained'
+              style={{maxWidth: '25px', maxHeight: '25px', minWidth: '25px', minHeight: '25px'}}>+
+        {/*<AddBoxIcon/>*/}
+      </Button>
       {error && <div className='errorMessage'>{error}</div>}
 
     </div>
