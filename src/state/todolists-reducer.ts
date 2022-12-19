@@ -1,23 +1,28 @@
 import {TodolistsPropsType} from '../App';
 
 
-type TodolistsReducerActionType={
-  type:string
-  [key:string]:any
-}
+type TodolistsReducerActionType =
+  | RemoveTodolistACType
 
+type RemoveTodolistACType = ReturnType<typeof removeTodolistAC>
+const initialState: TodolistsPropsType[] = []
 
-  const initialState:TodolistsPropsType[] = []
-
-export const todolistsReducer=(state = initialState, action:TodolistsReducerActionType)=>{
-  switch (action.type){
-    case '':{
-
+export const todolistsReducer = (state = initialState, action: TodolistsReducerActionType): TodolistsPropsType[]=> {
+  switch (action.type) {
+    case 'REMOVE-TODOLIST': {
+      return state.filter(tl=>tl.todolistId!==action.payload.todolistId)
     }
-    case '':{
-
-    }
+    // case '': {
+    //   return state
+    // }
     default:
       return state
   }
+}
+
+export const removeTodolistAC = (todolistId:string)=>{
+  return{
+    type:'REMOVE-TODOLIST',
+    payload:{todolistId}
+  }as const
 }
