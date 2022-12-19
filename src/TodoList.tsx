@@ -17,6 +17,8 @@ type TodoListType = {
   changeTaskTitle: (todolistId: string, taskId: string, title: string) => void
   filterChange: (todolistId: string, value: FilterValueType) => void
   removeTodolist: (todolistId: string) => void
+  changeTodolistTitle: (todolistId: string,title: string) => void
+
 
 }
 
@@ -55,6 +57,10 @@ export const TodoList = (props: TodoListType) => {
   const changeTaskTitle = (tID: string, title: string) => {
     props.changeTaskTitle(props.todolistId, tID, title)
   }
+
+  const changeTodolistTitleHandler = ( title: string) => {
+    props.changeTodolistTitle(props.todolistId, title)
+  }
   const removeTodolistHandler = () => {
     props.removeTodolist(props.todolistId)
   }
@@ -62,7 +68,7 @@ export const TodoList = (props: TodoListType) => {
   return (
     <div>
       <h3>
-        <EditableSpan value={props.title} callBack={(title) => changeTaskTitle(props.todolistId, title)}/>
+        <EditableSpan value={props.title} callBack={changeTodolistTitleHandler}/>
         <Button onClick={removeTodolistHandler}>
           <FolderDeleteIcon/>
         </Button>
