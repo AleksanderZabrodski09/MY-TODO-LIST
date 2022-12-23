@@ -3,7 +3,7 @@ import {combineReducers, legacy_createStore} from 'redux';
 import {tasksReducer} from './tasks-reducer';
 
 
-type AppRootReducerType =ReturnType<typeof rootReducer>
+export type AppRootReducerType =ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
   tasks:tasksReducer,
@@ -11,3 +11,6 @@ const rootReducer = combineReducers({
 })
 
 export const store = legacy_createStore(rootReducer)
+
+// @ts-ignore
+window.store = store
