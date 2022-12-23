@@ -1,7 +1,7 @@
 import {addTodolistAC, changeTodolistFilterAC, removeTodolistAC} from './todolists-reducer';
 import {TasksPropsType} from '../App';
 
-import {addTaskAC, changeTaskStatusAC, removeTaskAC, tasksReducer} from './tasks-reducer';
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer';
 
 
 let startState:TasksPropsType
@@ -84,18 +84,13 @@ expect(endState['todolistId1'][0].isDone).toBe(true)
 
 })
 
-//
-// test.skip('correct todolist\'s title should be changed', ()=>{
-//   const newTitle='new Title'
-//   const endState = todolistsReducer(startState, changeTodolistTitleAC(todolistId1, newTitle))
-//   expect(endState[0].title).toBe('new Title')
-//   expect(endState[1].title).toBe('What to buy?')
-//
-// })
-// test.skip('correct filter of todolist should be changed', ()=>{
-//
-//   const endState = todolistsReducer(startState, changeTodolistFilterAC(todolistId2, 'completed'))
-//   expect(endState[0].filter).toBe('all')
-//   expect(endState[1].filter).toBe('completed')
-//
-// })
+
+test('correct title of task should be changed', ()=>{
+
+
+  const endState = tasksReducer(startState, changeTaskTitleAC('todolistId1', '2', 'TS'))
+
+  expect(endState['todolistId1'][1].title).toBe('TS')
+  expect(endState['todolistId2'][1].title).toBe('laptop')
+})
+
