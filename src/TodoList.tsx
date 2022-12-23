@@ -53,7 +53,6 @@ export const TodoList = (props: TodoListType) => {
     props.filterChange(props.todolistId, 'completed')
   }
 
-
   const changeTaskTitle = (tID: string, title: string) => {
     props.changeTaskTitle(props.todolistId, tID, title)
   }
@@ -87,11 +86,6 @@ export const TodoList = (props: TodoListType) => {
                 changeTaskTitle={changeTaskTitle}
                 removeTask={removeTaskHeader}
               />
-              // <li key={el.id}>
-              //   <CheckBox checked={el.isDone} callBack={(value: boolean) => changeTaskStatusHandler(el.id, value)}/>
-              //   <EditableSpan value={el.title} callBack={(title)=>changeTaskTitle(el.id,title)}/>
-              //   <button onClick={() => removeTaskHeader(el.id)}>✖</button>
-              // </li>
             )
           })}
       </div>

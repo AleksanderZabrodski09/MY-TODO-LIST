@@ -21,19 +21,19 @@ beforeEach(()=>{
 })
 test('correct todolist should be removed',()=>{
 
-const endStart= todolistsReducer(startState,removeTodolistAC( todolistId1))
+const endState= todolistsReducer(startState,removeTodolistAC( todolistId1))
 
-  expect(endStart.length).toBe(1)
-  expect(endStart[0].todolistId).toBe(todolistId2)
+  expect(endState.length).toBe(1)
+  expect(endState[0].todolistId).toBe(todolistId2)
 })
 test('new todolist should be added',()=>{
 
 const newTitle='new Title'
 
-const endStart= todolistsReducer(startState,addTodolistAC(newTitle))
+const endState= todolistsReducer(startState,addTodolistAC(newTitle))
 
-  expect(endStart.length).toBe(3)
-  expect(endStart[2].todolistId).toBe(todolistId2)
+  expect(endState.length).toBe(3)
+  expect(endState[2].todolistId).toBe(todolistId2)
 })
 
 test('correct todolist\'s title should be changed', ()=>{
