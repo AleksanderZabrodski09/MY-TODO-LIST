@@ -1,7 +1,7 @@
-import {addTodolistAC, removeTodolistAC} from './todolists-reducer';
+import {addTodolistAC, changeTodolistFilterAC, removeTodolistAC} from './todolists-reducer';
 import {TasksPropsType} from '../App';
 
-import {addTaskAC, removeTaskAC, tasksReducer} from './tasks-reducer';
+import {addTaskAC, changeTaskStatusAC, removeTaskAC, tasksReducer} from './tasks-reducer';
 
 
 let startState:TasksPropsType
@@ -75,7 +75,14 @@ test('property with todolistId should be deleted',()=> {
   expect(endState['todolistId2']).not.toBeDefined()
 })
 
-test('')
+test('correct status of task should be changed', ()=>{
+
+  const endState = tasksReducer(startState, changeTaskStatusAC('todolistId1', '2', false))
+
+expect(endState['todolistId1'][1].isDone).toBe(false)
+expect(endState['todolistId1'][0].isDone).toBe(true)
+
+})
 
 //
 // test.skip('correct todolist\'s title should be changed', ()=>{

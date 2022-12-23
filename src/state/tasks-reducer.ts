@@ -6,6 +6,7 @@ import {v1} from 'uuid';
 type TodolistsReducerActionType =
   | ReturnType<typeof removeTaskAC>
   | ReturnType<typeof addTaskAC>
+  | ReturnType<typeof changeTaskStatusAC>
   // | ReturnType<typeof changeTodolistFilterAC>
   | RemoveTodolistACType
   | AddTodolistACType
@@ -43,9 +44,9 @@ export const tasksReducer = (state = initialState, action: TodolistsReducerActio
     // case 'CHANGE-TASK-TITLE': {
     //   return state.map(tl => tl.todolistId === action.payload.todolistId ? {...tl, title: action.payload.title} : tl)
     // }
-    // case 'CHANGE-TASK-STATUS': {
-    //   return state.map(tl=>tl.todolistId===action.payload.todolistId?{...tl, filter:action.payload.filter}:tl)
-    // }
+    case 'CHANGE-TASK-STATUS': {
+      return {...state, [action.payload.todolistId]:state[action.payload.todolistId].map(t=>t.id===action.payload.taskId?{...t, isDone:action.payload.isDone}:t)}
+    }
 
     default:
       return state
@@ -72,9 +73,9 @@ export const addTaskAC = (todolistId: string, title: string) => {
 //   } as const
 // }
 //
-// export const changeTaskFilterAC=(todolistId: string, filter: FilterValueType)=>{
-//   return{
-//     type:'CHANGE-TODOLIST-FILTER',
-//     payload:{todolistId, filter}
-//   }as const
-// }
+export const changeTaskStatusAC=(todolistId: string, taskId:string, isDone:boolean)=>{
+  return{
+    type:'CHANGE-TASK-STATUS',
+    payload:{todolistId, taskId, isDone}
+  }as const
+}
