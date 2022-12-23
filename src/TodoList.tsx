@@ -3,7 +3,7 @@ import {FilterValueType} from './App';
 import {InputForm} from './components/InputForm';
 import {EditableSpan} from './components/EditableSpan';
 import {Task} from './Task';
-import {Button} from '@mui/material';
+import {Button, Grid} from '@mui/material';
 import FolderDeleteIcon from '@mui/icons-material/FolderDelete';
 
 type TodoListType = {
@@ -73,7 +73,9 @@ export const TodoList = (props: TodoListType) => {
         </Button>
       </h3>
       <div>
-        <InputForm addItem={addTask}/>
+        <Grid container style={{paddingBottom: '25px'}}>
+          <InputForm addItem={addTask}/>
+        </Grid>
       </div>
       <div>
         {
