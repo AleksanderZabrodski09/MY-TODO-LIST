@@ -1,13 +1,15 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 import {Button, TextField} from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
-export const InputForm = ({addItem}: { addItem: (title: string) => void }) => {
+export const InputForm = memo(({addItem}: { addItem: (title: string) => void }) => {
 
   const [title, setTitle] = useState('')
   const [error, setError] = useState<string | null>(null)
 
   const addItemHandler = () => {
+    console.log('addItem called')
+
     if (title.trim() !== '') {
       addItem(title.trim())
       setTitle('')
@@ -20,7 +22,7 @@ export const InputForm = ({addItem}: { addItem: (title: string) => void }) => {
     setTitle(e.currentTarget.value)
   }
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    setError(null)
+    if(error)setError(null)
     if (e.key === "Enter") {
       addItemHandler();
     }
@@ -45,4 +47,4 @@ export const InputForm = ({addItem}: { addItem: (title: string) => void }) => {
 
     </div>
   )
-}
+})
