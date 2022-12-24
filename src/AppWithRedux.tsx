@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useCallback, useReducer, useState} from 'react';
 import './App.css';
 import {TaskType, TodoList} from './TodoList';
 import {v1} from 'uuid';
@@ -30,8 +30,8 @@ export type FilterValueType = 'all' | 'active' | 'completed'
 
 function AppWithRedux() {
 
-  const todolistId1 = v1();
-  const todolistId2 = v1();
+  // const todolistId1 = v1();
+  // const todolistId2 = v1();
 
   const todolists = useSelector<AppRootReducerType, TodolistsPropsType[]>(state => state.todolists)
   const tasks = useSelector<AppRootReducerType, TasksPropsType>(state => state.tasks)
@@ -59,10 +59,9 @@ function AppWithRedux() {
     dispatch(removeTodolistAC(todolistId))
 
   }
-  const addTodolist = (title: string) => {
+  const addTodolist = useCallback((title: string) => {
     dispatch(addTodolistAC(title))
-
-  }
+  },[])
   const changeTodolistTitle = (todolistId: string, title: string) => {
     dispatch(changeTodolistTitleAC(todolistId, title))
   }
@@ -94,8 +93,8 @@ function AppWithRedux() {
                     todolistId={tl.todolistId}
                     title={tl.title}
                     filter={tl.filter}
-                    addTask={addTask}
                     task={filterForTodolist}
+                    addTask={addTask}
                     removeTask={removeTask}
                     filterChange={filterChange}
                     changeTaskStatus={changeTaskStatus}

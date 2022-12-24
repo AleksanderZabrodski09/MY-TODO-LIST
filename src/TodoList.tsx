@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {FilterValueType} from './App';
 import {InputForm} from './components/InputForm';
 import {EditableSpan} from './components/EditableSpan';
@@ -32,9 +32,9 @@ export type TaskType = {
 export const TodoList = (props: TodoListType) => {
 
 
-  const addTask = (title: string) => {
+  const addTask = useCallback( (title: string) => {
     props.addTask(props.todolistId, title)
-  }
+  },[])
 
   const removeTaskHeader = (tID: string) => {
     props.removeTask(props.todolistId, tID)
