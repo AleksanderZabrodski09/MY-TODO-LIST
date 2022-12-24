@@ -31,32 +31,16 @@ function AppWithRedux() {
 
   const dispatch = useDispatch()
 
-  // const addTask = (todolistId: string, title: string) => {
-  //   dispatch(addTaskAC(todolistId, title))
-  // }
-  // const removeTask = (todolistId: string, taskId: string) => {
-  //   dispatch(removeTaskAC(todolistId, taskId))
-  //
-  // }
-  // const changeTaskStatus = (todolistId: string, taskId: string, value: boolean) => {
-  //   dispatch(changeTaskStatusAC(todolistId, taskId, value))
-  // }
-  // const changeTaskTitle = (todolistId: string, taskId: string, title: string) => {
-  //   dispatch(changeTaskTitleAC(todolistId, taskId, title))
-  // }
-
-  // const filterChange = (todolistId: string, value: FilterValueType) => {
-  //   dispatch(changeTodolistFilterAC(todolistId, value))
-  // }
-  const removeTodolist = (todolistId: string) => {
+  const removeTodolist = useCallback((todolistId: string) => {
     dispatch(removeTodolistAC(todolistId))
-  }
+  },[])
   const addTodolist = useCallback((title: string) => {
+    console.log('addItem called TODO')
     dispatch(addTodolistAC(title))
   },[])
-  const changeTodolistTitle = (todolistId: string, title: string) => {
+  const changeTodolistTitle = useCallback((todolistId: string, title: string) => {
     dispatch(changeTodolistTitleAC(todolistId, title))
-  }
+  },[])
 
   return (
     <div className="App">
@@ -70,13 +54,6 @@ function AppWithRedux() {
           {
             todolists.map(tl => {
 
-              // let filterForTodolist = tasks[tl.todolistId];
-              // if (tl.filter === 'active') {
-              //   filterForTodolist = filterForTodolist.filter(el => el.isDone === true);
-              // }
-              // if (tl.filter === 'completed') {
-              //   filterForTodolist = filterForTodolist.filter(el => el.isDone === false);
-              // }
 
               return <Grid item key={tl.todolistId}>
                 <Paper style={{padding: '10px'}}>
@@ -85,13 +62,7 @@ function AppWithRedux() {
                     todolistId={tl.todolistId}
                     title={tl.title}
                     filter={tl.filter}
-                    // task={filterForTodolist}
-                    // filterChange={filterChange}
-                    // addTask={addTask}
-                    // removeTask={removeTask}
-                    // changeTaskStatus={changeTaskStatus}
                     removeTodolist={removeTodolist}
-                    // changeTaskTitle={changeTaskTitle}
                     changeTodolistTitle={changeTodolistTitle}
                   />
                 </Paper>

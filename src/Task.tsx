@@ -1,6 +1,6 @@
 import {CheckBox} from './components/CheckBox';
 import {EditableSpan} from './components/EditableSpan';
-import React from 'react';
+import React, {memo} from 'react';
 import {TaskType} from './TodoList';
 import {Button} from '@mui/material';
 // import {Delete} from '@mui/icons-material';
@@ -12,7 +12,7 @@ type TaskPropsType = {
   changeTaskStatus: (taskId: string, value: boolean) => void
   changeTaskTitle: (taskId: string, title: string) => void
 }
-export const Task = ({task, removeTask, changeTaskStatus, changeTaskTitle}: TaskPropsType) => {
+export const Task = memo(({task, removeTask, changeTaskStatus, changeTaskTitle}: TaskPropsType) => {
   return <div className={task.isDone ? 'isDoneTask' : ''}>
     <CheckBox
       checked={task.isDone}
@@ -26,7 +26,7 @@ export const Task = ({task, removeTask, changeTaskStatus, changeTaskTitle}: Task
       <BackspaceIcon/>
     </Button>
   </div>
-}
+})
 
 //npm install @mui/material @emotion/react @emotion/styled
 //yarn add @mui/material @emotion/react @emotion/styled yarn add @mui/icons-material

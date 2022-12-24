@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {memo, useCallback} from 'react';
 import {FilterValueType} from './App';
 import {InputForm} from './components/InputForm';
 import {EditableSpan} from './components/EditableSpan';
@@ -7,24 +7,16 @@ import {Button, Grid} from '@mui/material';
 import FolderDeleteIcon from '@mui/icons-material/FolderDelete';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootReducerType} from './state/store';
-import {TasksPropsType} from './AppWithRedux';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './state/tasks-reducer';
 import {changeTodolistFilterAC} from './state/todolists-reducer';
 
 type TodoListType = {
   todolistId: string
   title: string
-  // task: TaskType[]
-  // removeTask: (todolistId: string, taskId: string) => void
   filter: FilterValueType
-  // addTask: (todolistId: string, title: string) => void
-  // changeTaskStatus: (todolistId: string, taskId: string, value: boolean) => void
-  // changeTaskTitle: (todolistId: string, taskId: string, title: string) => void
   // filterChange: (todolistId: string, value: FilterValueType) => void
   removeTodolist: (todolistId: string) => void
   changeTodolistTitle: (todolistId: string,title: string) => void
-
-
 }
 
 export type TaskType = {
@@ -34,46 +26,47 @@ export type TaskType = {
 }
 
 
-export const TodoList1 = (props: TodoListType) => {
+export const TodoList1 = memo((props: TodoListType) => {
+  console.log("Todolist called")
 
 
 
   let tasks = useSelector<AppRootReducerType, TaskType[]>(state => state.tasks[props.todolistId])
   const dispatch = useDispatch()
 
-  // let filterForTodolist = tasks[tl.todolistId];
+   tasks = [...tasks]
   if (props.filter === 'active') {
-    tasks = tasks.filter(el => el.isDone === true);
+    [...tasks] = tasks.filter(el => el.isDone === true);
   }
   if (props.filter === 'completed') {
-    tasks = tasks.filter(el => el.isDone === false);
+    [...tasks] = tasks.filter(el => el.isDone === false);
   }
 
   const addTask = useCallback( (title: string) => {
     dispatch(addTaskAC(props.todolistId, title))
   },[])
 
-  const removeTaskHeader = (tID: string) => {
+  const removeTaskHeader = useCallback((tID: string) => {
     dispatch(removeTaskAC(props.todolistId, tID))
-  }
-  const changeTaskStatusHandler = (tID: string, eValue: boolean) => {
+  },[])
+  const changeTaskStatusHandler = useCallback((tID: string, eValue: boolean) => {
     dispatch(changeTaskStatusAC(props.todolistId, tID, eValue))
-  }
-  const changeTaskTitle = (tID: string, title: string) => {
+  },[])
+  const changeTaskTitle = useCallback((tID: string, title: string) => {
     dispatch(changeTaskTitleAC(props.todolistId, tID, title))
-  }
+  },[])
 
-  const onAllClickHandler = () => {
+  const onAllClickHandler = useCallback(() => {
     dispatch(changeTodolistFilterAC(props.todolistId, 'all'))
-  }
-  const onActiveClickHandler = () => {
+  },[])
+  const onActiveClickHandler = useCallback(() => {
     dispatch(changeTodolistFilterAC(props.todolistId, 'active'))
     // props.filterChange(props.todolistId, 'active')
-  }
-  const onCompletedClickHandler = () => {
+  },[])
+  const onCompletedClickHandler = useCallback(() => {
     dispatch(changeTodolistFilterAC(props.todolistId, 'completed'))
     // props.filterChange(props.todolistId, 'completed')
-  }
+  },[])
 
 
 
@@ -134,6 +127,6 @@ export const TodoList1 = (props: TodoListType) => {
       </div>
     </div>
   )
-}
+})
 
 
