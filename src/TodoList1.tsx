@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppRootReducerType} from './state/store';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './state/tasks-reducer';
 import {changeTodolistFilterAC} from './state/todolists-reducer';
+import {TaskWithRedux} from './TaskWithRedux';
 
 type TodoListType = {
   todolistId: string
@@ -46,15 +47,15 @@ export const TodoList1 = memo((props: TodoListType) => {
     dispatch(addTaskAC(props.todolistId, title))
   },[props.todolistId])
 
-  const removeTaskHeader = useCallback((tID: string) => {
-    dispatch(removeTaskAC(props.todolistId, tID))
-  },[dispatch])
-  const changeTaskStatusHandler = useCallback((tID: string, eValue: boolean) => {
-    dispatch(changeTaskStatusAC(props.todolistId, tID, eValue))
-  },[dispatch])
-  const changeTaskTitle = useCallback((tID: string, title: string) => {
-    dispatch(changeTaskTitleAC(props.todolistId, tID, title))
-  },[dispatch])
+  // const removeTaskHeader = useCallback((tID: string) => {
+  //   dispatch(removeTaskAC(props.todolistId, tID))
+  // },[dispatch])
+  // const changeTaskStatusHandler = useCallback((tID: string, eValue: boolean) => {
+  //   dispatch(changeTaskStatusAC(props.todolistId, tID, eValue))
+  // },[dispatch])
+  // const changeTaskTitle = useCallback((tID: string, title: string) => {
+  //   dispatch(changeTaskTitleAC(props.todolistId, tID, title))
+  // },[dispatch])
 
   const onAllClickHandler = useCallback(() => {
     dispatch(changeTodolistFilterAC(props.todolistId, 'all'))
@@ -94,12 +95,10 @@ export const TodoList1 = memo((props: TodoListType) => {
         {
           tasks.map(el => {
             return (
-              <Task
+              <TaskWithRedux
                 key={el.id}
                 task={el}
-                changeTaskStatus={changeTaskStatusHandler}
-                changeTaskTitle={changeTaskTitle}
-                removeTask={removeTaskHeader}
+                todolistId={props.todolistId}
               />
             )
           })}
