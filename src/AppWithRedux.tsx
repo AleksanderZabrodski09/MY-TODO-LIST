@@ -33,14 +33,14 @@ function AppWithRedux() {
 
   const removeTodolist = useCallback((todolistId: string) => {
     dispatch(removeTodolistAC(todolistId))
-  },[])
+  },[dispatch])
   const addTodolist = useCallback((title: string) => {
-    console.log('addItem called TODO')
+    // console.log('addItem called TODO')
     dispatch(addTodolistAC(title))
-  },[])
+  },[dispatch])
   const changeTodolistTitle = useCallback((todolistId: string, title: string) => {
     dispatch(changeTodolistTitleAC(todolistId, title))
-  },[])
+  },[dispatch])
 
   return (
     <div className="App">

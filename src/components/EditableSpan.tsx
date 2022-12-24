@@ -1,7 +1,8 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 import {TextField} from '@mui/material';
 
-export const EditableSpan = ({value, callBack}: { value: string, callBack: (value: string) => void }) => {
+export const EditableSpan =memo( ({value, callBack}: { value: string, callBack: (value: string) => void }) => {
+  // console.log('addItem Span')
   const [editMode, setEditMode] = useState(false)
   let [newTitle, setNewTitle] = useState(value)
 
@@ -34,4 +35,4 @@ export const EditableSpan = ({value, callBack}: { value: string, callBack: (valu
       onKeyPress={onKeyPressHandler}
     />
     : <span onDoubleClick={activateEditMode}>{newTitle}</span>
-}
+})

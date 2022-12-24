@@ -13,6 +13,7 @@ type TaskPropsType = {
   changeTaskTitle: (taskId: string, title: string) => void
 }
 export const Task = memo(({task, removeTask, changeTaskStatus, changeTaskTitle}: TaskPropsType) => {
+  console.log("Task")
   return <div className={task.isDone ? 'isDoneTask' : ''}>
     <CheckBox
       checked={task.isDone}

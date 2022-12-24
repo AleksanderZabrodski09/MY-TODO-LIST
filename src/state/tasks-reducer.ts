@@ -1,4 +1,4 @@
-import {TasksPropsType, TodolistsPropsType} from '../App';
+import {TasksPropsType} from '../App';
 import {AddTodolistACType, RemoveTodolistACType} from './todolists-reducer';
 import {v1} from 'uuid';
 

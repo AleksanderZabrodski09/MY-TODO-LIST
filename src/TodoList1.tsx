@@ -27,7 +27,7 @@ export type TaskType = {
 
 
 export const TodoList1 = memo((props: TodoListType) => {
-  console.log("Todolist called")
+  // console.log("Todolist")
 
 
 
@@ -44,35 +44,35 @@ export const TodoList1 = memo((props: TodoListType) => {
 
   const addTask = useCallback( (title: string) => {
     dispatch(addTaskAC(props.todolistId, title))
-  },[])
+  },[props.todolistId])
 
   const removeTaskHeader = useCallback((tID: string) => {
     dispatch(removeTaskAC(props.todolistId, tID))
-  },[])
+  },[dispatch])
   const changeTaskStatusHandler = useCallback((tID: string, eValue: boolean) => {
     dispatch(changeTaskStatusAC(props.todolistId, tID, eValue))
-  },[])
+  },[dispatch])
   const changeTaskTitle = useCallback((tID: string, title: string) => {
     dispatch(changeTaskTitleAC(props.todolistId, tID, title))
-  },[])
+  },[dispatch])
 
   const onAllClickHandler = useCallback(() => {
     dispatch(changeTodolistFilterAC(props.todolistId, 'all'))
-  },[])
+  },[props.todolistId])
   const onActiveClickHandler = useCallback(() => {
     dispatch(changeTodolistFilterAC(props.todolistId, 'active'))
     // props.filterChange(props.todolistId, 'active')
-  },[])
+  },[props.todolistId])
   const onCompletedClickHandler = useCallback(() => {
     dispatch(changeTodolistFilterAC(props.todolistId, 'completed'))
     // props.filterChange(props.todolistId, 'completed')
-  },[])
+  },[props.todolistId])
 
 
 
-  const changeTodolistTitleHandler = ( title: string) => {
+  const changeTodolistTitleHandler = useCallback(( title: string) => {
     props.changeTodolistTitle(props.todolistId, title)
-  }
+  },[])
   const removeTodolistHandler = () => {
     props.removeTodolist(props.todolistId)
   }
