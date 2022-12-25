@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 import {FilterValueType} from './App';
 import {InputForm} from './components/InputForm';
 import {EditableSpan} from './components/EditableSpan';
@@ -35,12 +35,22 @@ export const TodoList1 = memo((props: TodoListType) => {
   const dispatch = useDispatch()
 
   tasks = [...tasks]
-  if (props.filter === 'active') {
-    [...tasks] = tasks.filter(el => el.isDone === true);
-  }
-  if (props.filter === 'completed') {
-    [...tasks] = tasks.filter(el => el.isDone === false);
-  }
+  // if (props.filter === 'active') {
+  //   [...tasks] = tasks.filter(el => el.isDone === true);
+  // }
+  // if (props.filter === 'completed') {
+  //   [...tasks] = tasks.filter(el => el.isDone === false);
+  // }
+
+  tasks = useMemo(()=>{
+    if (props.filter === 'active') {
+      [...tasks] = tasks.filter(el => el.isDone === true);
+    }
+    if (props.filter === 'completed') {
+      [...tasks] = tasks.filter(el => el.isDone === false);
+    }
+    return tasks
+  }, [props.filter,tasks])
 
   const addTask = useCallback((title: string) => {
     dispatch(addTaskAC(props.todolistId, title))
