@@ -9,7 +9,7 @@ import {AppRootReducerType} from './state/store';
 import {addTaskAC} from './state/tasks-reducer';
 import {changeTodolistFilterAC} from './state/todolists-reducer';
 import {TaskWithRedux} from './TaskWithRedux';
-import {ButtonUC} from './ButtonUC';
+import {ButtonUC} from './components/ButtonUC';
 
 type TodoListType = {
   todolistId: string
