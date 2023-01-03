@@ -23,9 +23,6 @@ export type FilterValueType = 'all' | 'active' | 'completed'
 
 function AppWithRedux() {
 
-  // const todolistId1 = v1();
-  // const todolistId2 = v1();
-
   const todolists = useSelector<AppRootReducerType, TodolistsPropsType[]>(state => state.todolists)
   // const tasks = useSelector<AppRootReducerType, TasksPropsType>(state => state.tasks)
 
