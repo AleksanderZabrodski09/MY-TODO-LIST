@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppRootReducerType} from './state/store';
 import {addTaskAC} from './state/tasks-reducer';
 import {changeTodolistFilterAC} from './state/todolists-reducer';
-import {TaskWithRedux} from './TaskWithRedux';
+import {TaskWithRedux} from './components/TaskWithRedux';
 import {ButtonUC} from './components/ButtonUC';
 
 type TodoListType = {

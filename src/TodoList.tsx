@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import {FilterValueType} from './App';
 import {InputForm} from './components/InputForm';
 import {EditableSpan} from './components/EditableSpan';
-import {Task} from './Task';
+import {Task} from './components/Task';
 import {Button, Grid} from '@mui/material';
 import FolderDeleteIcon from '@mui/icons-material/FolderDelete';
 

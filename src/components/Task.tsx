@@ -1,7 +1,7 @@
-import {CheckBox} from './components/CheckBox';
-import {EditableSpan} from './components/EditableSpan';
+import {CheckBox} from './CheckBox';
+import {EditableSpan} from './EditableSpan';
 import React, {memo} from 'react';
-import {TaskType} from './TodoList';
+import {TaskType} from '../TodoList';
 import {Button} from '@mui/material';
 // import {Delete} from '@mui/icons-material';
 import BackspaceIcon from '@mui/icons-material/Backspace';

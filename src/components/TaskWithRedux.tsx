@@ -1,19 +1,18 @@
-import {CheckBox} from './components/CheckBox';
-import {EditableSpan} from './components/EditableSpan';
+import {CheckBox} from './CheckBox';
+import {EditableSpan} from './EditableSpan';
 import React, {memo} from 'react';
-import {TaskType} from './TodoList';
+import {TaskType} from '../TodoList';
 import {Button} from '@mui/material';
-// import {Delete} from '@mui/icons-material';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import {useDispatch} from 'react-redux';
-import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './state/tasks-reducer';
+import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from '../state/tasks-reducer';
+
 
 type TaskPropsType = {
   task: TaskType
   todolistId: string
 }
 export const TaskWithRedux = memo(({task, todolistId}: TaskPropsType) => {
-  console.log("TaskWithRedux")
 
   const dispatch = useDispatch()
 
