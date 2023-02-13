@@ -1,29 +1,22 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {TaskType, TodoList} from './TodoList';
+import {TaskType} from './TodoList';
 import {InputForm} from './components/InputForm';
 import ButtonAppBar from './components/AppBAR';
-import {addTodolistAC, changeTodolistTitleAC, removeTodolistAC} from './state/todolists-reducer';
+import {addTodolistAC, changeTodolistTitleAC, removeTodolistAC, TodolistsDomainType} from './state/todolists-reducer';
 import {AppRootReducerType} from './state/store';
 import {useDispatch, useSelector} from 'react-redux';
 import {Container, Grid, Paper} from '@mui/material';
 import {TodoList1} from './TodoList1';
 
 
-export type TodolistsPropsType = {
-  todolistId: string
-  title: string
-  filter: FilterValueType
-}
-export type TasksPropsType = {
-  [key: string]: TaskType[]
-}
 
-export type FilterValueType = 'all' | 'active' | 'completed'
+
+
 
 function AppWithRedux() {
 
-  const todolists = useSelector<AppRootReducerType, TodolistsPropsType[]>(state => state.todolists)
+  const todolists = useSelector<AppRootReducerType, TodolistsDomainType[]>(state => state.todolists)
   // const tasks = useSelector<AppRootReducerType, TasksPropsType>(state => state.tasks)
 
   const dispatch = useDispatch()
@@ -52,11 +45,11 @@ function AppWithRedux() {
             todolists.map(tl => {
 
 
-              return <Grid item key={tl.todolistId}>
+              return <Grid item key={tl.id}>
                 <Paper style={{padding: '10px'}}>
                   <TodoList1
-                    key={tl.todolistId}
-                    todolistId={tl.todolistId}
+                    key={tl.id}
+                    todolistId={tl.id}
                     title={tl.title}
                     filter={tl.filter}
                     removeTodolist={removeTodolist}
