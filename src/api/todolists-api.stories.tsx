@@ -166,3 +166,57 @@ export const CreateTask = () => {
     </div>
   </div>
 }
+export const UpdateTask = () => {
+  const [state, setState] = useState<any>(null)
+  const [todolistId, setTodolistId] = useState<string>('')
+  const [taskId, setTaskId] = useState<string>('')
+  const [title, setTitle] = useState<string>('title 1')
+  const [description, setDescription] = useState<string>('description 1')
+  const [status, setStatus] = useState<number>(0)
+  const [priority, setPriority] = useState<number>(0)
+  const [startDate, setStartDate] = useState<string>('')
+  const [deadline, setDeadline] = useState<string>('deadline 1')
+
+  const createTask = () => {
+    todolistAPI.updateTask(todolistId, taskId, {
+      deadline: '',
+      description: description,
+      priority: priority,
+      startDate: '',
+      status,
+      title
+    })
+      .then((res) => {
+        setState(res)
+      })
+  }
+
+  return <div>{JSON.stringify(state)}
+    <div>
+      <input placeholder={'todolistId'} value={todolistId} onChange={(e) => {
+        setTodolistId(e.currentTarget.value)
+      }}/>
+      <input placeholder={'taskId'} value={taskId} onChange={(e) => {
+        setTaskId(e.currentTarget.value)
+      }}/>
+      <input placeholder={'title Task'} value={title} onChange={(e) => {
+        setTitle(e.currentTarget.value)
+      }}/>
+      <input placeholder={'description'} value={description} onChange={(e) => {
+        setDescription(e.currentTarget.value)
+      }}/>
+      <input placeholder={'task status'} value={status} type={'number'} onChange={(e) => {setStatus(+e.currentTarget.value)}}/>
+      <input placeholder={'title Task'} value={title} onChange={(e) => {
+        setPriority(+e.currentTarget.value)
+      }}/>
+       <input placeholder={'startDate'} value={startDate} onChange={(e) => {
+        setStartDate(e.currentTarget.value)
+      }}/>
+       <input placeholder={'deadline'} value={deadline} onChange={(e) => {
+        setDeadline(e.currentTarget.value)
+      }}/>
+
+      <button onClick={createTask}>create task</button>
+    </div>
+  </div>
+}
