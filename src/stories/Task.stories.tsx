@@ -1,8 +1,8 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import {Task} from '../components/Task';
-import {TaskType} from '../TodoList';
+import {TaskPriorities, TaskStatuses, TaskType} from '../api/todolist-api';
 
 
 export default {
@@ -10,7 +10,7 @@ export default {
   component: Task,
 
   args: {
-    task: {id: 'werrrt', isDone: true, title: 'React'},
+    task: {id: 'werrrt', status: TaskStatuses.Completed, title: 'React', order: 0, addedDate: '', todoListId: 'todolistId1', priority: TaskPriorities.Hi, startDate: '', deadline: '', description: ''},
     removeTask: action('removeTask'),
     changeTaskStatus: action('changeTaskStatus'),
     changeTaskTitle: action('changeTaskTitle'),
@@ -33,18 +33,18 @@ export const TaskIsDoneStory = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 TaskIsDoneStory.args = {
   // ...baseArgs,
-  task: {id: 'werrrt', isDone: true, title: 'React'},
+  task: {id: 'werrrt', status: TaskStatuses.Completed, title: 'React', order: 0, addedDate: '', todoListId: 'todolistId1', priority: TaskPriorities.Hi, startDate: '', deadline: '', description: ''},
 };
 export const TaskIsNotDoneStory = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 TaskIsNotDoneStory.args = {
   // ...baseArgs,
-  task: {id: 'werrrte', isDone: false, title: 'CSS'},
+  task: {id: 'werrrte', status: TaskStatuses.New, title: 'CSS', order: 0, addedDate: '', todoListId: 'todolistId1', priority: TaskPriorities.Hi, startDate: '', deadline: '', description: ''},
 };
 
 const Template1: ComponentStory<typeof Task> = (args) => {
-  const [task, setTask] = useState({id: 'werrrte', isDone: false, title: 'CSS'})
-  const changeTaskStatus = () => setTask({...task, isDone: !task.isDone})
+  const [task, setTask] = useState({id: 'werrrte', status: TaskStatuses.New, title: 'CSS', order: 0, addedDate: '', todoListId: 'todolistId1', priority: TaskPriorities.Hi, startDate: '', deadline: '', description: ''})
+  const changeTaskStatus = () => setTask({...task, status: task.status?TaskStatuses.Completed:TaskStatuses.New})
   const changeTaskTitle = (taskId:string,title: string) => setTask({...task, title: title})
   const removeTask = () => setTask({} as TaskType)
 

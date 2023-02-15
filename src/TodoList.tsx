@@ -1,10 +1,11 @@
 import React, {useCallback} from 'react';
-import {FilterValueType} from './App';
 import {InputForm} from './components/InputForm';
 import {EditableSpan} from './components/EditableSpan';
 import {Task} from './components/Task';
 import {Button, Grid} from '@mui/material';
 import FolderDeleteIcon from '@mui/icons-material/FolderDelete';
+import {TaskStatuses, TaskType} from './api/todolist-api';
+import {FilterValueType} from './state/todolists-reducer';
 
 type TodoListType = {
   todolistId: string
@@ -13,20 +14,18 @@ type TodoListType = {
   removeTask: (todolistId: string, taskId: string) => void
   filter: FilterValueType
   addTask: (todolistId: string, title: string) => void
-  changeTaskStatus: (todolistId: string, taskId: string, value: boolean) => void
+  changeTaskStatus: (todolistId: string, taskId: string, eValue: TaskStatuses) => void
   changeTaskTitle: (todolistId: string, taskId: string, title: string) => void
   filterChange: (todolistId: string, value: FilterValueType) => void
   removeTodolist: (todolistId: string) => void
   changeTodolistTitle: (todolistId: string,title: string) => void
-
-
 }
 
-export type TaskType = {
-  id: string
-  title: string
-  isDone: boolean
-}
+// export type TaskType = {
+//   id: string
+//   title: string
+//   isDone: boolean
+// }
 
 
 export const TodoList = (props: TodoListType) => {
@@ -39,8 +38,8 @@ export const TodoList = (props: TodoListType) => {
   const removeTaskHeader = (tID: string) => {
     props.removeTask(props.todolistId, tID)
   }
-  const changeTaskStatusHandler = (tID: string, eValue: boolean) => {
-    props.changeTaskStatus(props.todolistId, tID, eValue)
+  const changeTaskStatusHandler = (tID: string, eValue: TaskStatuses) => {
+    props.changeTaskStatus(props.todolistId, tID, eValue )
   }
 
   const onAllClickHandler = () => {

@@ -1,11 +1,11 @@
 import {CheckBox} from './CheckBox';
 import {EditableSpan} from './EditableSpan';
 import React, {memo} from 'react';
-import {TaskType} from '../TodoList';
 import {Button} from '@mui/material';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import {useDispatch} from 'react-redux';
 import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from '../state/tasks-reducer';
+import {TaskStatuses, TaskType} from '../api/todolist-api';
 
 
 type TaskPropsType = {
@@ -16,17 +16,17 @@ export const TaskWithRedux = memo(({task, todolistId}: TaskPropsType) => {
 
   const dispatch = useDispatch()
 
-  const {id, title, isDone} = task
+  const {id, title, status} = task
 
-  return <div className={isDone ? 'isDoneTask' : ''}>
+  return <div className={status ? 'isDoneTask' : ''}>
     <CheckBox
-      checked={isDone}
-      callBack={(value) => dispatch(changeTaskStatusAC(todolistId,id, value))}/>
+      checked={status === TaskStatuses.Completed}
+      callBack={(value) => dispatch(changeTaskStatusAC(todolistId, id,  value ? TaskStatuses.Completed : TaskStatuses.New))}/>
     <EditableSpan
       value={title}
-      callBack={(title) => dispatch(changeTaskTitleAC(todolistId,id, title))}/>
+      callBack={(title) => dispatch(changeTaskTitleAC(todolistId, id, title))}/>
     <Button
-      onClick={() => dispatch(removeTaskAC(todolistId,id))}>
+      onClick={() => dispatch(removeTaskAC(todolistId, id))}>
       {/*✖*/}
       <BackspaceIcon/>
     </Button>

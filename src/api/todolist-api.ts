@@ -64,7 +64,7 @@ type GetTasksResponse = {
   items: TaskType[]
 }
 
-type UpdateTaskModelType = {
+export type UpdateTaskModelType = {
   title: string
   description: string
   status: TaskStatuses
@@ -89,14 +89,14 @@ export enum TaskStatuses {
 }
 
 export type TaskType = {
+  id: string
+  todoListId: string
+  status: TaskStatuses
   description: string
   title: string
-  status: TaskStatuses
   priority: TaskPriorities
   startDate: string
   deadline: string
-  id: string
-  todoListId: string
   order: number
   addedDate: string
 }

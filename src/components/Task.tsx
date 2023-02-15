@@ -1,23 +1,22 @@
 import {CheckBox} from './CheckBox';
 import {EditableSpan} from './EditableSpan';
 import React, {memo} from 'react';
-import {TaskType} from '../TodoList';
 import {Button} from '@mui/material';
-// import {Delete} from '@mui/icons-material';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import {TaskStatuses, TaskType} from '../api/todolist-api';
 
 type TaskPropsType = {
   task: TaskType
   removeTask: (taskId: string) => void
-  changeTaskStatus: (taskId: string, value: boolean) => void
+  changeTaskStatus: (taskId: string, value: TaskStatuses) => void
   changeTaskTitle: (taskId: string, title: string) => void
 }
 export const Task = memo(({task, removeTask, changeTaskStatus, changeTaskTitle}: TaskPropsType) => {
   console.log("Task")
-  return <div className={task.isDone ? 'isDoneTask' : ''}>
+  return <div className={task.status ? 'isDoneTask' : ''}>
     <CheckBox
-      checked={task.isDone}
-      callBack={(value) => changeTaskStatus(task.id, value)}/>
+      checked={task.status === TaskStatuses.Completed}
+      callBack={(value) => changeTaskStatus(task.id, value ? TaskStatuses.Completed: TaskStatuses.New)}/>
     <EditableSpan
       value={task.title}
       callBack={(title) => changeTaskTitle(task.id, title)}/>

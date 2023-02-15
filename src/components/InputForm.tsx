@@ -1,6 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 import {Button, TextField} from '@mui/material';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 
 export const InputForm = memo(({addItem}: { addItem: (title: string) => void }) => {
   const [title, setTitle] = useState('')
