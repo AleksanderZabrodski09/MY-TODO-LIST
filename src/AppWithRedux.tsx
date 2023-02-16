@@ -1,10 +1,15 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import {TaskType} from './TodoList';
 import {InputForm} from './components/InputForm';
 import ButtonAppBar from './components/AppBAR';
-import {addTodolistAC, changeTodolistTitleAC, removeTodolistAC, TodolistsDomainType} from './state/todolists-reducer';
-import {AppRootReducerType} from './state/store';
+import {
+  addTodolistAC, addTodolistTC,
+  changeTodolistTitleAC, changeTodolistTitleTC, getTodolistTC,
+  removeTodolistAC, removeTodolistTC,
+  setTodolistsAC,
+  TodolistsDomainType
+} from './state/todolists-reducer';
+import {AppDispatch, AppRootReducerType, useAppSelector} from './state/store';
 import {useDispatch, useSelector} from 'react-redux';
 import {Container, Grid, Paper} from '@mui/material';
 import {TodoList1} from './TodoList1';
@@ -15,26 +20,27 @@ import {todolistAPI} from './api/todolist-api';
 function AppWithRedux() {
 
   useEffect(()=>{
-    todolistAPI.getTodolist()
-      .then((res)=>{
-        dispatch(setTodolisAC(res))
-      })
-  })
+    dispatch(getTodolistTC())
+    // todolistAPI.getTodolist()
+    //   .then((res)=>{
+    //     dispatch(setTodolistsAC(res))
+    //   })
+  },[])
 
-  const todolists = useSelector<AppRootReducerType, TodolistsDomainType[]>(state => state.todolists)
+  const todolists = useAppSelector<TodolistsDomainType[]>(state => state.todolists)
   // const tasks = useSelector<AppRootReducerType, TasksPropsType>(state => state.tasks)
 
-  const dispatch = useDispatch()
+  const dispatch = AppDispatch()
 
   const removeTodolist = useCallback((todolistId: string) => {
-    dispatch(removeTodolistAC(todolistId))
+    dispatch(removeTodolistTC(todolistId))
   },[dispatch])
   const addTodolist = useCallback((title: string) => {
     // console.log('addItem called TODO')
-    dispatch(addTodolistAC(title))
+    dispatch(addTodolistTC(title))
   },[dispatch])
   const changeTodolistTitle = useCallback((todolistId: string, title: string) => {
-    dispatch(changeTodolistTitleAC(todolistId, title))
+    dispatch(changeTodolistTitleTC(todolistId, title))
   },[dispatch])
 
   return (
