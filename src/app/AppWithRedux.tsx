@@ -1,17 +1,19 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import {InputForm} from './components/InputForm';
-import ButtonAppBar from './components/AppBAR';
+import {InputForm} from '../components/InputForm';
+import ButtonAppBar from '../components/AppBAR';
 import {
   addTodolistTC,
   changeTodolistTitleTC,
   getTodolistTC,
   removeTodolistTC,
   TodolistsDomainType
-} from './state/todolists-reducer';
-import {AppDispatch, useAppSelector} from './state/store';
+} from '../state/todolists-reducer';
+import {AppDispatch, useAppSelector} from '../state/store';
 import {Container, Grid, Paper} from '@mui/material';
-import {TodoList1} from './TodoList1';
+import {TodoList1} from '../TodoList1';
+
+import {ErrorSnackbar} from '../ErrorSnackbar/ErrorSnackbar';
 
 
 function AppWithRedux() {
@@ -42,6 +44,7 @@ function AppWithRedux() {
 
   return (
     <div className="App">
+      <ErrorSnackbar/>
       <ButtonAppBar/>
       <Container fixed>
         <Grid container style={{padding: '25px'}}>

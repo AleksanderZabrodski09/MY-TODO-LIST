@@ -5,7 +5,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
 import {store} from './state/store';
-import AppWithRedux from './AppWithRedux';
+import AppWithRedux from './app/AppWithRedux';
 
 // ReactDOM.render(<App />,  document.getElementById('root'));
 
