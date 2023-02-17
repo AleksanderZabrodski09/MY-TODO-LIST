@@ -1,11 +1,10 @@
-import React, {memo, useCallback, useMemo} from 'react';
+import React, {memo, useCallback, useEffect, useMemo} from 'react';
 import {InputForm} from './components/InputForm';
 import {EditableSpan} from './components/EditableSpan';
 import {Button, Grid} from '@mui/material';
 import FolderDeleteIcon from '@mui/icons-material/FolderDelete';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootReducerType} from './state/store';
-import {addTaskAC} from './state/tasks-reducer';
+import {AppDispatch, useAppSelector} from './state/store';
+import {addTaskTC, getTasksTC} from './state/tasks-reducer';
 import {changeTodolistFilterAC, FilterValueType} from './state/todolists-reducer';
 import {TaskWithRedux} from './components/TaskWithRedux';
 import {ButtonUC} from './components/ButtonUC';
@@ -15,24 +14,21 @@ type TodoListType = {
   todolistId: string
   title: string
   filter: FilterValueType
-  // filterChange: (todolistId: string, value: FilterValueType) => void
   removeTodolist: (todolistId: string) => void
   changeTodolistTitle: (todolistId: string, title: string) => void
 }
-
-// export type TaskType = {
-//   id: string
-//   title: string
-//   isDone: boolean
-// }
-
 
 export const TodoList1 = memo((props: TodoListType) => {
   // console.log("Todolist")
 
 
-  let tasks = useSelector<AppRootReducerType, TaskType[]>(state => state.tasks[props.todolistId])
-  const dispatch = useDispatch()
+  let tasks = useAppSelector<TaskType[]>(state => state.tasks[props.todolistId])
+  const dispatch = AppDispatch()
+  // const {id, title, status}= tasks
+useEffect(()=>{
+    dispatch(getTasksTC(props.todolistId))
+},[dispatch])
+
 
   tasks = [...tasks]
   // if (props.filter === 'active') {
@@ -52,8 +48,8 @@ export const TodoList1 = memo((props: TodoListType) => {
     return tasks
   }, [props.filter,tasks])
 
-  const addTask = useCallback((title: string) => {
-    dispatch(addTaskAC(props.todolistId, title))
+  const addTaskHandler = useCallback((title: string) => {
+    dispatch(addTaskTC(props.todolistId, title))
   }, [props.todolistId])
 
   // const removeTaskHeader = useCallback((tID: string) => {
@@ -96,7 +92,7 @@ export const TodoList1 = memo((props: TodoListType) => {
       </h3>
       <div>
         <Grid container style={{paddingBottom: '25px'}}>
-          <InputForm addItem={addTask}/>
+          <InputForm addItem={addTaskHandler}/>
         </Grid>
       </div>
       <div>
@@ -108,8 +104,7 @@ export const TodoList1 = memo((props: TodoListType) => {
                 task={el}
                 todolistId={props.todolistId}
               />
-            )
-          })}
+            )})}
       </div>
       <div>
 

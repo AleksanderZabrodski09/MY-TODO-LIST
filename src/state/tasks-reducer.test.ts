@@ -1,11 +1,9 @@
 import {addTodolistAC, removeTodolistAC} from './todolists-reducer';
 import {
   addTaskAC,
-  changeTaskStatusAC,
-  changeTaskTitleAC,
   removeTaskAC,
   TasksPropsType,
-  tasksReducer
+  tasksReducer, updateTaskAC
 } from './tasks-reducer';
 import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
 
@@ -86,7 +84,7 @@ test('property with todolistId should be deleted',()=> {
 
 test('correct status of task should be changed', ()=>{
 
-  const endState = tasksReducer(startState, changeTaskStatusAC('todolistId1', '2', TaskStatuses.New))
+  const endState = tasksReducer(startState, updateTaskAC('todolistId1', '2', {status:TaskStatuses.New}))
 
 expect(endState['todolistId1'][1].status).toBe(false)
 expect(endState['todolistId1'][0].status).toBe(true)
@@ -97,7 +95,7 @@ expect(endState['todolistId1'][0].status).toBe(true)
 test('correct title of task should be changed', ()=>{
 
 
-  const endState = tasksReducer(startState, changeTaskTitleAC('todolistId1', '2', 'TS'))
+  const endState = tasksReducer(startState, updateTaskAC('todolistId1', '2', {title:'TS'}))
 
   expect(endState['todolistId1'][1].title).toBe('TS')
   expect(endState['todolistId2'][1].title).toBe('laptop')

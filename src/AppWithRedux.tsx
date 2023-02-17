@@ -3,18 +3,15 @@ import './App.css';
 import {InputForm} from './components/InputForm';
 import ButtonAppBar from './components/AppBAR';
 import {
-  addTodolistAC, addTodolistTC,
-  changeTodolistTitleAC, changeTodolistTitleTC, getTodolistTC,
-  removeTodolistAC, removeTodolistTC,
-  setTodolistsAC,
+  addTodolistTC,
+  changeTodolistTitleTC,
+  getTodolistTC,
+  removeTodolistTC,
   TodolistsDomainType
 } from './state/todolists-reducer';
-import {AppDispatch, AppRootReducerType, useAppSelector} from './state/store';
-import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, useAppSelector} from './state/store';
 import {Container, Grid, Paper} from '@mui/material';
 import {TodoList1} from './TodoList1';
-import {todolistAPI} from './api/todolist-api';
-
 
 
 function AppWithRedux() {
@@ -46,7 +43,6 @@ function AppWithRedux() {
   return (
     <div className="App">
       <ButtonAppBar/>
-
       <Container fixed>
         <Grid container style={{padding: '25px'}}>
           <InputForm addItem={addTodolist}/>
@@ -54,8 +50,6 @@ function AppWithRedux() {
         <Grid container spacing={3}>
           {
             todolists.map(tl => {
-
-
               return <Grid item key={tl.id}>
                 <Paper style={{padding: '10px'}}>
                   <TodoList1
@@ -71,8 +65,6 @@ function AppWithRedux() {
             })
           }
         </Grid>
-
-
       </Container>
     </div>
   );

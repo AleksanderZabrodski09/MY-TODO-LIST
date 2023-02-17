@@ -6,8 +6,6 @@ export const InputForm = memo(({addItem}: { addItem: (title: string) => void }) 
   const [error, setError] = useState<string | null>(null)
 
   const addItemHandler = () => {
-
-
     if (title.trim() !== '') {
       addItem(title.trim())
       setTitle('')
