@@ -4,13 +4,15 @@ import {combineReducers, legacy_createStore} from 'redux'
 import {v1} from 'uuid'
 import {tasksReducer} from '../state/tasks-reducer';
 import {todolistsReducer} from '../state/todolists-reducer';
-import {AppRootReducerType, store} from '../state/store';
+import {AppRootReducerType} from '../state/store';
 import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
+import {appReducer} from '../app/app-reducer';
 
 
 const rootReducer = combineReducers({
   tasks: tasksReducer,
-  todolists: todolistsReducer
+  todolists: todolistsReducer,
+  app:appReducer
 })
 
 const initialGlobalState:AppRootReducerType = {
@@ -27,6 +29,10 @@ const initialGlobalState:AppRootReducerType = {
       {id: v1(), title: 'Milk', status: TaskStatuses.Completed,  order: 0, addedDate: '', todoListId: 'todolistId1', priority: TaskPriorities.Hi, startDate: '', deadline: '', description: ''},
       {id: v1(), title: 'React Book', status: TaskStatuses.New,  order: 0, addedDate: '', todoListId: 'todolistId1', priority: TaskPriorities.Hi, startDate: '', deadline: '', description: ''}
     ]
+  },
+  app:{
+    error: null,
+    status:'idle'
   }
 }
 
