@@ -20,10 +20,6 @@ function AppWithRedux() {
 
   useEffect(()=>{
     dispatch(getTodolistTC())
-    // todolistAPI.getTodolist()
-    //   .then((res)=>{
-    //     dispatch(setTodolistsAC(res))
-    //   })
   },[])
 
   const todolists = useAppSelector<TodolistsDomainType[]>(state => state.todolists)
