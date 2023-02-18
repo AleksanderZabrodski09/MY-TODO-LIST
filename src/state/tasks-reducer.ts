@@ -2,20 +2,10 @@ import {AddTodolistACType, RemoveTodolistACType, SetTodolistsACType} from './tod
 import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from '../api/todolist-api';
 import {Dispatch} from 'redux';
 import {AppRootReducerType} from './store';
+import {setLoadingStatusAC, SetLoadingStatusType} from '../app/app-reducer';
 
 
-export type TasksPropsType = {
-  [key: string]: TaskType[]
-}
 
-type TasksReducerActionType =
-  | ReturnType<typeof removeTaskAC>
-  | ReturnType<typeof addTaskAC>
-  | ReturnType<typeof updateTaskAC>
-  | ReturnType<typeof setTasksAC>
-  | RemoveTodolistACType
-  | AddTodolistACType
-  | SetTodolistsACType
 //  reducer
 
 const initialState: TasksPropsType = {}
@@ -105,23 +95,29 @@ export const setTasksAC=(todolistId:string, tasks: TaskType[])=>{
 
 export const getTasksTC=(todolistId:string)=>{
   return (dispatch:Dispatch)=>{
+    dispatch(setLoadingStatusAC('loading'))
     todolistAPI.getTasks(todolistId)
       .then((res)=>{
         dispatch(setTasksAC(todolistId, res.items))
+        dispatch(setLoadingStatusAC('succeeded'))
       })
   }
 }
 
 export const addTaskTC =(todolistId:string, title:string)=>(dispatch:Dispatch)=>{
+  dispatch(setLoadingStatusAC('loading'))
   todolistAPI.createTask(todolistId, title)
     .then((res)=>{
       dispatch(addTaskAC(res.data.item))
+      dispatch(setLoadingStatusAC('succeeded'))
     })
 }
 export const removeTaskTC =(todolistId:string, taskId:string)=>(dispatch:Dispatch)=>{
+  dispatch(setLoadingStatusAC('loading'))
   todolistAPI.deleteTask(todolistId, taskId)
     .then((res)=>{
       dispatch(removeTaskAC(todolistId, taskId))
+      dispatch(setLoadingStatusAC('succeeded'))
     })
 }
 
@@ -141,11 +137,28 @@ export const updateTaskTC=(todolistId:string, taskId:string, propertyModel: Upda
         ...task,
         ...propertyModel
       }
+      dispatch(setLoadingStatusAC('loading'))
       todolistAPI.updateTask(todolistId, taskId, model)
         .then((res)=>{
           dispatch(updateTaskAC(todolistId, taskId,propertyModel))
+          dispatch(setLoadingStatusAC('succeeded'))
         })
     }
   }
 }
 
+//  types
+
+export type TasksPropsType = {
+  [key: string]: TaskType[]
+}
+
+type TasksReducerActionType =
+  | ReturnType<typeof removeTaskAC>
+  | ReturnType<typeof addTaskAC>
+  | ReturnType<typeof updateTaskAC>
+  | ReturnType<typeof setTasksAC>
+  | RemoveTodolistACType
+  | AddTodolistACType
+  | SetTodolistsACType
+  | SetLoadingStatusType
