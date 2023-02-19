@@ -73,6 +73,12 @@ export type UpdateTaskModelType = {
   deadline: string
 }
 
+export enum ResultCode {
+  SUCCEEDED,
+  FAILED,
+  CAPTCHA = 10
+}
+
 export enum TaskPriorities {
   Low = 0,
   Middle = 1,
